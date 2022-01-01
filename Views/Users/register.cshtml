@@ -1,0 +1,67 @@
+﻿@model Users
+
+@{
+    ViewData["Title"] = "register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-4"style="background-color:gainsboro">
+        <form asp-action="register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="username" class="control-label"></label>
+                <input asp-for="username" class="form-control" placeholder="username" />
+                <span asp-validation-for="username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" placeholder="email address" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" class="form-control" placeholder="password" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="confirmpassword" class="control-label"></label>
+                <input asp-for="confirmpassword" class="form-control" placeholder="confirm password" />
+                <span asp-validation-for="confirmpassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="phone" class="control-label"></label>
+                <input asp-for="phone" class="form-control" placeholder="phone number" />
+                <span asp-validation-for="phone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="تسجيل" class="btn btn-primary" />
+                <div class="container">
+                    <span class="alert-danger">@ViewBag.error</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+       
+
+        <div class="container"style="margin-top:5px">
+            <img src="~/img/203-2035339_register-user-register-online-icon-png.png" />
+
+        </div>
+    </div>
+
+</div>
+@*<div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

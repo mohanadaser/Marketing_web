@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Shopping_Order>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<br />
+<h1 class="text-info"style="margin-top:30px">تفاصيل الطلب</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <td>
+            رقم الطلب :
+        </td>
+        <td>
+            @ViewBag.ordercode
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            اسم العميل:
+        </td>
+        <td>
+            @ViewBag.name
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            العنوان:
+        </td>
+        <td>
+            @ViewBag.address
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            رقم التليفون:
+        </td>
+        <td>
+            @ViewBag.tel
+        </td>
+
+    </tr>
+</table>
+<hr />
+<table class="table table-striped border">
+    <thead style="background-color:#0094ff">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(Model => Model.pr_oname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.time_order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.price)
+            </th>
+            <th></th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.pr_oname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time_order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+
+
+        </tr>
+
+
+        }
+    </tbody>
+
+
+</table>
+
+
+<div>
+   
+    <a asp-action="Index"class="btn btn-primary">الرجوع الى صفحة الطلبات</a>
+</div>

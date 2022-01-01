@@ -1,0 +1,55 @@
+﻿@model ProductType
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<form style="margin-top:50px"asp-action="create">
+    <div class="row">
+        <div class="form-group col-4">
+            <label>نوع الصنف</label>
+            <input type="text"asp-for="proytpe"class="form-control" />
+            <span asp-validation-for="proytpe"></span>
+        </div>
+        
+    </div>
+    <div class="row">
+        <button type="submit" asp-action="Create" class="btn btn-primary">انشاء</button>
+    </div>
+
+</form>
+
+
+<div class="col-md-6">
+
+    <table class="table table-bordered table-striped" style="margin-top:50px;">
+        <thead style="background-color: aqua;">
+            <tr>
+                <th>
+                  نوع الصنف
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ProductType productType in ViewBag.protype)
+            {
+                <tr>
+                    <td>
+                      @productType.proytpe
+                    </td>
+                    <td>
+
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@productType.typeid"onclick="return confirm('هل تريد حذف العنصر المحدد؟')">حذف
+                        <i class="fa fa-trash-o"></i>
+                        
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+   
+</div>
+

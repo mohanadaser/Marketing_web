@@ -1,0 +1,137 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model ProductsCarts
+@{
+    ViewData["Title"] = "viewcarts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr />
+<hr />
+<div class="text-info" style="margin-top:50px">
+    <h2>عرض سلة المشتريات</h2>
+</div>
+<form class="form-group" asp-controller="home" asp-action="viewcarts">
+    <table>
+        <tr>
+            <td>
+                <label>اسمك</label>
+            </td>
+            <td>
+                <input type="text" asp-for="name" id="name" placeholder="اسمك ثلاثى" style="width:300px;" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>العنوان</label>
+            </td>
+            <td>
+                <textarea type="text" asp-for="address" id="address" placeholder="عنوانك بالتفصيل" style="width:400px;"></textarea>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>رقم تليفونك</label>
+
+            </td>
+            <td>
+                <input type="tel" asp-for="tel" id="tel" placeholder="رقم موبايلك" />
+                <span asp-validation-for="tel" class="text-danger"></span>
+            </td>
+        </tr>
+
+
+
+    </table>
+    <hr />
+    <input type="submit" class="btn btn-success" asp-action="saveorder" value="اكمال عملية الشراء" id="add" />
+
+    <a class="btn btn-primary" asp-action="index">العوده الى الصفحة الرئيسيه</a>
+    <hr />
+    <table>
+        <tr>
+            <td>
+                @*<h3> اجمالى السله:@Context.Session.GetString("count")</h3>*@
+                <h3 class="text-danger"> اجمالى السعر:@Model.listproducts.Sum(c => c.price)</h3>
+                <h3 class="text-dark">اجمالى السله:@Model.listproducts.Count()</h3>
+
+            </td>
+
+        </tr>
+    </table>
+    @*<div class="alert alert-success" style="display:none" id="dv">
+            <strong>Success!</strong> Indicates a successful or positive action.
+        </div>*@
+    <table class="table table-striped ">
+        <thead style="background-color:aqua">
+            <tr>
+                <td>
+                    رقم المنتج
+                </td>
+                <td>
+                    المنتج
+                </td>
+                <td>
+                    صورة المنتج
+                </td>
+                <td>
+                    الكميه
+                </td>
+
+                <td>
+                    السعر
+                </td>
+                <td>
+                    الاجمالى
+                </td>
+                <td>
+                    الحذف
+                </td>
+
+            </tr>
+
+        </thead>
+        <tbody>
+        </tbody>
+        @for (int i = 0; i < Model.listproducts.Count; i++)
+        {
+            <tr>
+                <td>
+                    <input asp-for="listproducts[i].proid" class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="listproducts[i].proname" class="form-control" />
+                </td>
+
+                <td>
+                    <img src="~/img/mypro/@Model.listproducts[i].proimage" width="50" height="60" />
+                </td>
+                <td>
+                    <input asp-for="listproducts[i].qty" class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="listproducts[i].price" class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="listproducts[i].total" class="form-control" />
+                </td>
+                <td>
+                    <input type="submit" value="حذف" asp-action="deletecart" asp-route-id="@Model.listproducts[i].proid" class="btn btn-danger" />
+                </td>
+
+            </tr>
+
+        }
+
+
+
+    </table>
+
+
+    <br />
+
+
+
+
+</form>
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

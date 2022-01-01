@@ -1,0 +1,62 @@
+﻿@model Contact
+
+@{
+    ViewData["Title"] = "contact_us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h1 style="padding-top:50px;" class="text-info">التواصل مع ادارة الموقع</h1>
+<div class="text-primary">
+    @if (ViewBag.message != null)
+    {
+        <h2>@ViewBag.message</h2>
+    }
+</div>
+
+<div class="row">
+
+  
+    <div class="col-md-4"style="background-color:gainsboro">
+        <form asp-action="contact_us">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" type="email" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="message" class="control-label"></label>
+                <textarea asp-for="message" class="form-control"></textarea>
+
+                <span asp-validation-for="message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="phone_number" class="control-label"></label>
+                <input asp-for="phone_number" class="form-control" />
+                <span asp-validation-for="phone_number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ارسل طلبك" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+   
+        <div class="col-md-8">
+            <img src="/img/125-1254954_contact-us-png-images-for-website.png" width="500" height="500" />
+        </div>
+   
+</div>
+
+@*<div>
+        <a asp-action="Index"></a>
+    </div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

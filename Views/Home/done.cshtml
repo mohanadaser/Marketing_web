@@ -1,0 +1,29 @@
+﻿@model ProductsCarts
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "done";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+@*@if(Model.listproducts==null)
+{*@
+<div class="alert-success" style="margin-top:50px">
+    <h2>تمت عملية شراء طلبك بنجاح يا  @Context.Session.GetString("username")</h2>
+    <h3>رقم الطلب هو @TempData["code"]</h3>
+</div>
+
+
+@*else
+{
+    <div class="alert-danger"style="margin-top:50px">
+        <h1>لايوجد منتجات فى سلة المشتريات لشرائها</h1>
+    
+    </div>
+
+}*@
+
+
+
+
+

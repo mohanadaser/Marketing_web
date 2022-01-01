@@ -1,0 +1,55 @@
+﻿@model Products
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit"enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="pro_id" />
+            <div class="form-group">
+                <label asp-for="proname" class="control-label"></label>
+                <input asp-for="proname" class="form-control" />
+                <span asp-validation-for="proname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="proimg" class="control-label"></label>
+                <input type="file"id="files"name="files" asp-for="proimg" class="form-control" />
+                <span asp-validation-for="proimg" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="prodesc" class="control-label"></label>
+                <textarea asp-for="prodesc" class="form-control"></textarea>
+               
+                <span asp-validation-for="prodesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="price" class="control-label"></label>
+                <input type="number" asp-for="price" class="form-control" />
+                <span asp-validation-for="price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="typeid" class="control-label">نوع الصنف</label>
+                <select  asp-for="typeid"asp-items="ViewBag.typeid" class="form-control" ></select>
+              
+                <span asp-validation-for="typeid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="تعديل" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

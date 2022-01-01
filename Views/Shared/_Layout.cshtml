@@ -1,0 +1,151 @@
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Marketing</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="~/font/font-awesome.css" />
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+
+</head>
+<body style="background-color:azure">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow fixed-top ">
+            <div class="container ar">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Marketing</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1 ">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home fa-fw"></i>الرئيسيه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="users" asp-action="contact_us"><i class="fa fa-phone fa-fw"></i>اتصل بنا</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fa fa-lock fa-fw"></i>الخصوصيه</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <form method="post" asp-controller="Home" asp-action="Search">
+                                <input class="text-center" type="search" name="searchname" id="searchname" placeholder="ابحث هنا...Enter" style="height:40px" />
+                                <i class="fa fa-search text-white"></i>
+                            </form>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ml-lg-auto">
+                        @if(Context.Session.GetString("username") == null)
+                        {
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/Home/login"><i class="fa fa-sign-in fa-fw"></i>تسجيل دخول</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/Users/register"><i class="fa fa-user fa-fw"></i>الاشتراكات</a>
+                        </li>
+
+                        }
+                        else if (Context.Session.GetString("username") == "boss"&&Context.Session.GetString("password")=="boss123")
+                        {
+
+
+                        <li class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:green;font-size:large">
+                                ادارة الموقع
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-size:large">
+                                <a class="nav-link text-danger" asp-area="" asp-controller="home" asp-action="logout">تسجيل الخروج</a>
+                                <a class="dropdown-item" href="/products/index">منتجات الموقع</a>
+                                <a class="dropdown-item" href="/ProductType/index">اضافة انواع للمنتجات</a>
+                                <a class="dropdown-item" href="/Users/contactlist">طلبات التواصل مع الاداره</a>
+                                <a class="dropdown-item" href="/Shopping_Order/Index">عرض جميع طلبات الشراء</a>
+
+                                <a class="dropdown-item" href="/users/userslist">عرض جميع المشتركين بالموقع</a>
+
+                            </div>
+                        </li>
+
+                        }
+
+                        else
+                        {
+
+                        <li class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:#00ffff;color:black;font-size:large">
+                                مرحبا يا  @Context.Session.GetString("username")
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="font-size:large">
+                                <a class="dropdown-item" href="/home/editaccount">تعديل حسابك</a>
+
+
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" asp-area="" asp-controller="home" asp-action="logout" style="font-size:large">تسجيل الخروج</a>
+
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/Home/viewcarts">
+                                <i class="fa fa-shopping-cart"></i><span class="text-right" style="background-color:red">@TempData["count"]</span>
+                                سلة المشتريات
+                            </a>
+                        </li>
+
+
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+            
+
+        </nav>
+
+    </header>
+   
+    <div class="container ar">
+
+
+        <main role="main" class="pb-1">
+
+
+
+            @RenderBody()
+
+
+
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted" id="myfooter">
+        <div class="container">
+            &copy; 2020 - Marketing - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+<style>
+    input#searchname {
+        margin-top: 5px;
+        border-radius: 20px;
+    }
+</style>
+
